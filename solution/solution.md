@@ -1,50 +1,65 @@
-# 🧠 Solution – (Forensics CTF)
+🟢 STEP 1: Check the file type
+file final.png
 
-This document explains the complete step-by-step solution to crack the
-forensics challenge and retrieve the flag.
--
 
-## 📁 Given File
-- `final.png`
+Expected output:
 
-At first glance, the file opens as a normal cyber-themed image.
+final.png: PNG image data
 
----
+🟢 STEP 2: Inspect image metadata
+exiftool final.png
 
-## 🔍 Step 1: Analyze the file structure
 
-Open a terminal in the folder containing `final.png` and run:
+Look carefully for this line:
 
-```bash
+Comment : U2FsdGVkX1/30fQUBkFIGHKlTiMIG5L3DMDKggCwZGk=
+
+🟢 STEP 3: Decrypt the encrypted metadata
+
+Use OpenSSL to decrypt it.
+
+echo "U2FsdGVkX1/30fQUBkFIGHKlTiMIG5L3DMDKggCwZGk=" | \
+openssl enc -aes-256-cbc -a -d -pass pass:SECE_FORENSICS
+
+Output:
+WelcometoSECE
+
+🟢 STEP 4: Check for hidden files inside the image
 binwalk final.png
 
-##📦 Step 2: Extract the hidden ZIP archive
 
-Attempt to extract the ZIP file from the image:
+You will see:
 
+Zip archive data
+
+🟢 STEP 5: Extract the hidden ZIP
 unzip final.png
 
 
-You will be prompted for a password:
+When prompted for password, type:
 
 WelcometoSECE
 
 
-After entering the correct password, a file named inside.jpeg is extracted.
+After extraction, you get:
 
-##🖼 Step 3: Inspect the extracted image
+inside.jpeg
 
-The extracted file inside.jpeg also appears to be a normal image.
-To check for hidden information, use the strings command:
+🟢 STEP 6: Analyze the extracted image
+file inside.jpeg
 
+
+Output:
+
+JPEG image data
+
+🟢 STEP 7: Extract readable strings from the image
 strings inside.jpeg
 
-##🚩 Step 4: Retrieve the flag
 
-Among the readable strings in the image, the flag can be found:
+To directly locate the flag:
 
+strings inside.jpeg | grep SECE
+
+🏁 FINAL FLAG
 SECE{image_inside_image}
-
-##✅ Final Flag
-SECE{image_inside_image}
-
