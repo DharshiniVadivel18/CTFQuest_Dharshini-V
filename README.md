@@ -24,7 +24,6 @@ SECE{...}
 - Try analyzing the image using forensic tools.
 - Sometimes files contain more than what is visible.
 - If you find an archive, it may not be freely accessible.
-- to access it ,the way is a **welcome message related to SECE**.
 
 Good luck and happy hacking! 🚀
 
