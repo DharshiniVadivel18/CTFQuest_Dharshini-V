@@ -18,8 +18,8 @@ Comment : U2FsdGVkX1/30fQUBkFIGHKlTiMIG5L3DMDKggCwZGk=
 
 Use OpenSSL to decrypt it.
 
-echo "U2FsdGVkX1/30fQUBkFIGHKlTiMIG5L3DMDKggCwZGk=" | \
-openssl enc -aes-256-cbc -a -d -pass pass:SECE_FORENSICS
+echo "U2FsdGVkX19xO3wXzeAazVKRVj7N882PVSm/IXQEpqU=" | \
+openssl enc -aes-256-cbc -a -d -pass pass:ilovedan-2kaii7
 
 Output:
 WelcometoSECE
